@@ -12,6 +12,8 @@
   </th:block>
 
   <th:block th:fragment="content">
+    <!-- 统计 -->
+    <th:block th:replace="~{module/home/statistics}" />
     <!--/* 通知 */-->
     <th:block th:if="${theme.config.others.head_notice}">
       <th:block th:replace="~{module/home/notice}" />

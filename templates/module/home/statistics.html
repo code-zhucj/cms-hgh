@@ -1,0 +1,45 @@
+<th:block th:fragment="statistics">
+  <div class="statistics">
+    <div class="statistics-container">
+
+      <div class="statistics-content">
+        <div class ="item">
+          <div> k+</div>
+          <span>Total Transaction</span>
+        </div>
+        <div class ="item">
+          <div> k+</div>
+          <span>Ave Block Time</span>
+        </div>
+        <div class ="item">
+          <div> k+</div>
+          <span>Total Transaction</span>
+        </div>
+        <div class ="item">
+          <div> k+</div>
+          <span>Wallet Addresses</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</th:block>
+<script type="text/javascript" th:inline="javascript">
+  const num = [999, 30,768,160];
+  let j = 0;
+  for (const item of document.querySelectorAll(".item div")) {
+    let valueClass = document.createElement("value");
+    item.insertBefore(valueClass, item.firstChild);
+    let i = 0;
+    let targetValue = num[j++];
+    let incr = Math.ceil(targetValue / 60)  ;
+    let interVal = setInterval(()=>{
+      if(i>=targetValue){
+        clearInterval(interVal);
+        return;
+      }
+      i+=incr;
+      valueClass.innerHTML = Math.min(i, targetValue);
+    }, 50);
+  };
+</script>
