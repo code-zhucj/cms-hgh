@@ -5,7 +5,7 @@
   --theme-brightness: 1;
 
   /* layout - content */
-  --site-content-max-width: 780px;
+  --site-content-max-width: 100%;
 
   /* 加载图 */
   --loading-image: none;

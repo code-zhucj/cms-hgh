@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" th:fragment="roadmap">
+<th:block >
+  <div class="roadmap-background">
+    <div class="roadmap-content">
+      <div class="roadmap-header">
+        <div class="roadmap-title">
+          <div>MILESTONES TO DELIVER</div>
+          <div style="font-size: 60px">Roadmap</div>
+        </div>
+        <div class="desc" >
+          There are four major stages for zkMeta shifting from DAU focused to TVL focused then the whole ecosystem
+        </div>
+      </div>
+      <div class="list">
+      </div>
+    </div>
+    
+  </div>
+
+</th:block>
+<script type="text/javascript" th:inline="javascript">
+  init();
+  var prevDetail = 0;
+  function init(){
+    const num = 4;
+    let boxList = document.getElementsByClassName("list")[0];
+    let list=[];
+    for (let i = 0; i <num; i++) {
+      let card = document.createElement("div");
+      list[i] = card;
+      card.setAttribute("class", "card");
+      card.appendChild(cardContent())
+      card.style.flex = i===0?7:1;
+      boxList.appendChild(card);
+      const index = i;
+      const initValue = i===0?"true":"false";
+      card.setAttribute("isDetail", initValue);
+      card.onclick = ()=>{
+        let isDetail = card.getAttribute("isDetail");
+        if(isDetail === "false"){
+          openCard(card);
+          let prevCard = list[prevDetail];
+          closeCard(prevDetail+1, prevCard);
+          prevDetail = index;
+        }
+      }
+      if(i>0){
+        closeCard(i+1, card);
+      } else {
+        openCard(card)
+      }
+    }
+
+  }
+
+  function cardContent(){
+    let cardContent = document.createElement("div");
+    cardContent.className = 'card-content';
+    let title = document.createElement("span");
+    title.className = "card-title close-card";
+    let desc = document.createElement("desc");
+    desc.className = "card-desc close-card";
+    cardContent.appendChild(title);
+    cardContent.appendChild(desc);
+    return cardContent;
+  }
+
+  function closeCard(num, card){
+    card.setAttribute("isDetail", "false")
+    card.style.flex = 1;
+    card.className = "close card";
+    card.style.animationIterationCount = 1;
+
+    let cardContent = card.firstChild;
+    let title = cardContent.childNodes[0];
+    title.innerHTML = "0" + num;
+    title.className = "card-title close-card";
+
+    let desc = cardContent.childNodes[1];
+    desc.innerHTML = "这里添加关闭文本";
+    desc.className = "card-desc close-card";
+
+  }
+
+  function openCard(card){
+    card.setAttribute("isDetail", "true");
+    card.style.flex = 7;
+    card.style.animationIterationCount = 1;
+    card.className = "open card";
+
+    let cardContent = card.firstChild;
+    let title = cardContent.childNodes[0];
+    title.innerHTML = "这里添加标题文本";
+    title.className = "card-title open-card";
+
+    let desc = cardContent.childNodes[1];
+    desc.innerHTML = "这里添加开启文本";
+    desc.className = "card-desc open-card";
+  }
+
+</script>
+
+</html>
